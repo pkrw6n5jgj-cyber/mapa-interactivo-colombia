@@ -75,12 +75,15 @@ sitios_sf$popup <- sprintf(
   "<div style='font-family:Arial;max-width:240px'>
      <b style='font-size:14px'>%s</b><br>
      %s, %s<br><br>%s<br><br>
-     <b>Latitud:</b> %.6f<br><b>Longitud:</b> %.6f<br>
+     <b>Latitud:</b> %s<br><b>Longitud:</b> %s<br>
      <b>Distancia al ITM:</b> %s km
    </div>",
   sitios_sf$nombre, sitios_sf$municipio, sitios_sf$departamento,
-  sitios_sf$descripcion, sitios_sf$latitud, sitios_sf$longitud,
-  format(sitios_sf$dist_itm_km, big.mark = ".", decimal.mark = ",")
+  sitios_sf$descripcion,
+  # Coma decimal, como en la configuración regional de Colombia
+  formatC(sitios_sf$latitud, format = "f", digits = 6, decimal.mark = ","),
+  formatC(sitios_sf$longitud, format = "f", digits = 6, decimal.mark = ","),
+  formatC(sitios_sf$dist_itm_km, format = "f", digits = 1, big.mark = ".", decimal.mark = ",")
 )
 
 titulo <- "<div style='font-family:Arial;background:white;padding:8px 12px;
